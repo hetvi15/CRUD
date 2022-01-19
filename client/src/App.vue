@@ -1,13 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Login from './components/Login.vue'
+import SignUp from './components/SignUp.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Login,
+    SignUp
+  }
 }
 </script>
 
