@@ -32,15 +32,15 @@
             </div>
             <p v-if="loginform.ageValidity==='invalid'">Please enter your real age</p>
             <br>
-             <div id="radio">
+            <div id="radio">
                 Select Your Gender
                 <input type="radio" name="male" id="male" value="Male" v-model="loginform.gender" checked>
                 <label for="one">Male</label>
 
-                <input type="radio" name="female" id="female"   value="Female" v-model="loginform.gender">
+                <input type="radio" name="female" id="female" value="Female" v-model="loginform.gender">
                 <label for="two">Female</label>
 
-                <input type="radio" name="other" id="other" value="Other"  v-model="loginform.gender">
+                <input type="radio" name="other" id="other" value="Other" v-model="loginform.gender">
                 <label for="two">Other</label>
 
                 <br>
@@ -290,17 +290,18 @@
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select>
             </div>
-                 <button type="submit" style="color:whitesmoke" id="sub"><b>Sign Up</b></button>
-        <br><br>
-        <router-link to="/">
-            Already have an account ? Login
-        </router-link>
+            <button type="submit" style="color:whitesmoke" id="sub"><b>Sign Up</b></button>
+            <br><br>
+            <router-link to="/">
+                Already have an account ? Login
+            </router-link>
         </div>
     </form>
 </div>
 </template>
 
 <script>
+import AuthenticationServices from '../services/AuthenticationService'
 export default {
   name: 'Login',
   data () {
@@ -370,13 +371,25 @@ export default {
     disabledDate (date) {
       return date.getTime() > Date.now()
     },
-    postData () {
-      console.log(this.loginform.name)
+    async postData () {
+      /* console.log(this.loginform.name)
       console.log(this.loginform.username)
       console.log(this.loginform.password)
       console.log(this.loginform.age)
       console.log(this.loginform.gender)
-      console.log(this.loginform.country)
+      console.log(this.loginform.country) */
+
+      const response = await AuthenticationServices.register({
+        email: this.loginform.username,
+        name: this.loginform.name,
+        password: this.loginform.password,
+        age: this.loginform.age,
+        gender: this.loginform.gender,
+        country: this.loginform.country
+      })
+      console.log('_______________________')
+      console.log(response)
+      console.log(response.data)
     }
   }
 }

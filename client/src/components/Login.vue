@@ -14,7 +14,7 @@
         <p v-if="loginform.passwordValidity==='invalid'">A valid password should contain atleast eight characters,minimum one letter and one number</p>
         <br><br>
         <br>
-        <button v-on:click="getLogin" style="color:whitesmoke" id="sub"><b>Login</b></button>
+        <button  style="color:whitesmoke" id="sub"><b>Login</b></button>
         <br><br>
         <router-link to="/SignUp">
             Not a Member? Sign Up
@@ -25,6 +25,7 @@
 
 <script>
 import validator from 'validator'
+
 export default {
   name: 'Login',
   data () {
@@ -39,11 +40,7 @@ export default {
     }
   },
   methods: {
-    getLogin () {
-      console.log(this.loginform.username + this.loginform.password +
-                this.loginform.usernameValidity +
-                this.loginform.passwordValidity)
-    },
+
     validateEmail () {
       // eslint-disable-next-line no-useless-escape
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.username)) {
