@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import validator from 'validator'
 export default {
   name: 'Login',
   data () {
@@ -50,6 +51,7 @@ export default {
       } else {
         this.loginform.usernameValidity = 'invalid'
       }
+      console.log(validator.isEmail(this.loginform.username))
     },
     validatePassword () {
       // eslint-disable-next-line no-useless-escape
