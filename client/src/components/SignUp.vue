@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 <template>
 <div>
-    <h2> ENTER YOUR DETAILS </h2>
+    <h3> USER REGISTRATION </h3>
     <form @submit.prevent="postData" method="POST">
 
         <div>
@@ -27,6 +27,11 @@
             <p v-if="loginform.confirm_passwordValidity==='invalid'">Your Passwords don't match</p>
             <br>
 
+            <div class="form-control" :class="{invalid:loginform.birthdateValidity === 'invalid'}">
+              <input placeholder="Enter Your Birthdate"  type="text" onfocus="(this.type='date')" id="date" v-model="loginform.birthdate" required @blur="validateBirthdate">
+            </div>
+            <p v-if="loginform.birthdateValidity==='invalid'">Please enter a valid date</p>
+            <br>
             <div class="form-control" :class="{invalid:loginform.ageValidity === 'invalid'}">
                 <input type="number" placeholder="Enter Your Age" v-model="loginform.age" required />
             </div>
@@ -301,6 +306,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import AuthenticationServices from '../services/AuthenticationService'
 export default {
   name: 'Login',
@@ -315,6 +321,7 @@ export default {
         passwordValidity: '',
         confirm_password: '',
         confirm_passwordValidity: '',
+        birthdate: '',
         age: '',
         ageValidity: '',
         val2: '',
@@ -324,11 +331,6 @@ export default {
     }
   },
   methods: {
-    getLogin () {
-      console.log(this.loginform.username + this.loginform.password +
-                this.loginform.usernameValidity +
-                this.loginform.passwordValidity)
-    },
     validateName () {
       if (/[a-zA-Z]+$/.test(this.loginform.name)) {
         this.loginform.nameValidity = 'valid'
@@ -368,21 +370,29 @@ export default {
       }
     },
 
-    disabledDate (date) {
-      return date.getTime() > Date.now()
+    validateBirthdate () {
+      let dateMomentObject = moment(this.loginform.birthdate, 'YYYY/MM/DD') // 1st argument - string, 2nd argument - format
+      let dateObject = dateMomentObject.toDate()
+      if (dateObject.getTime() > Date.now()) {
+        this.loginform.birthdateValidity = 'invalid'
+      } else {
+        this.loginform.birthdateValidity = 'valid'
+      }
     },
+
     async postData () {
-      /* console.log(this.loginform.name)
+      console.log(this.loginform.name)
       console.log(this.loginform.username)
       console.log(this.loginform.password)
       console.log(this.loginform.age)
       console.log(this.loginform.gender)
-      console.log(this.loginform.country) */
+      console.log(this.loginform.country)
 
       const response = await AuthenticationServices.register({
-        email: this.loginform.username,
         name: this.loginform.name,
+        username: this.loginform.username,
         password: this.loginform.password,
+        birthdate: this.loginform.birthdate,
         age: this.loginform.age,
         gender: this.loginform.gender,
         country: this.loginform.country
