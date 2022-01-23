@@ -2,22 +2,22 @@
 <template>
 <div>
     <h3> USER REGISTRATION </h3>
-    <form @submit.prevent="postData" method="POST">
+    <form @submit.prevent="postData" method="POST" >
 
         <div>
             <div class="form-control" :class="{invalid:loginform.nameValidity === 'invalid'}">
-                <input type="text" placeholder="Enter Name" v-model="loginform.name" required @blur="validateName"><br>
+                <input type="text" placeholder="Enter Name" v-model="loginform.Name" required @blur="validateName"><br>
             </div>
             <br>
             <p v-if="loginform.nameValidity==='invalid'">Please enter a valid name</p>
             <div class="form-control" :class="{invalid:loginform.usernameValidity === 'invalid'}">
-                <input type="text" placeholder="Enter Username" v-model="loginform.username" required @blur="validateEmail"><br>
+                <input type="text" placeholder="Enter Username" v-model="loginform.Username" required @blur="validateEmail"><br>
             </div>
             <p v-if="loginform.usernameValidity==='invalid'">Please enter a valid email</p>
+            <p v-if="error==='invalid'">Email already in use </p>
             <br>
-
             <div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}">
-                <input type="password" placeholder="Enter Password" v-model="loginform.password" required @blur="validatePassword"><br>
+                <input type="password" placeholder="Enter Password" v-model="loginform.Password" required @blur="validatePassword"><br>
             </div>
             <p v-if="loginform.passwordValidity==='invalid'">A valid password should contain atleast eight characters,minimum one letter and one number</p>
             <br>
@@ -28,18 +28,18 @@
             <br>
 
             <div class="form-control" :class="{invalid:loginform.birthdateValidity === 'invalid'}">
-              <input placeholder="Enter Your Birthdate"  type="text" onfocus="(this.type='date')" id="date" v-model="loginform.birthdate" required @blur="validateBirthdate">
+              <input placeholder="Enter Your Birthdate"  type="text" onfocus="(this.type='date')" id="date" v-model="loginform.Birthdate" required @blur="validateBirthdate">
             </div>
             <p v-if="loginform.birthdateValidity==='invalid'">Please enter a valid date</p>
             <br>
             <div class="form-control" :class="{invalid:loginform.ageValidity === 'invalid'}">
-                <input type="number" placeholder="Enter Your Age" v-model="loginform.age" required />
+                <input type="number" placeholder="Enter Your Age" v-model="loginform.Age" required />
             </div>
             <p v-if="loginform.ageValidity==='invalid'">Please enter your real age</p>
             <br>
             <div id="radio">
                 Select Your Gender
-                <input type="radio" name="male" id="male" value="Male" v-model="loginform.gender" checked>
+                <input type="radio" name="male" id="male" value="Male" v-model="loginform.Gender" checked>
                 <label for="one">Male</label>
 
                 <input type="radio" name="female" id="female" value="Female" v-model="loginform.gender">
@@ -52,7 +52,7 @@
                 <br>
             </div><br><br>
             <div>
-                <select v-model="loginform.country" required>
+                <select v-model="loginform.Country" required>
                     <option value="" disabled selected>Select Your Country</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
@@ -295,7 +295,7 @@
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select>
             </div>
-            <button type="submit" style="color:whitesmoke" id="sub"><b>Sign Up</b></button>
+           <button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled">REGISTER</button>
             <br><br>
             <router-link to="/">
                 Already have an account ? Login
@@ -308,31 +308,47 @@
 <script>
 import moment from 'moment'
 import AuthenticationServices from '../services/AuthenticationService'
+// import AuthenticationController from './server/controllers/AuthenticationController'
 export default {
   name: 'Login',
   data () {
     return {
+      error: '',
       loginform: {
-        name: '',
+        Name: '',
         nameValidity: '',
-        username: '',
+        Username: '',
         usernameValidity: '',
-        password: '',
+        Password: '',
         passwordValidity: '',
         confirm_password: '',
         confirm_passwordValidity: '',
-        birthdate: '',
-        age: '',
+        Birthdate: '',
+        birthdateValidity: '',
+        Age: '',
         ageValidity: '',
         val2: '',
-        country: '',
-        gender: 'Male'
-      }
+        Country: '',
+        Gender: 'Male'
+      },
+      counter: 0
     }
   },
+  computed: {
+    isDisabled () {
+      if (this.loginform.nameValidity && this.loginform.usernameValidity && this.loginform.passwordValidity &&
+        this.loginform.confirm_passwordValidity && this.loginform.birthdateValidity === 'valid') {
+        return false
+      } else {
+        return true
+      }
+    }
+
+  },
   methods: {
+
     validateName () {
-      if (/[a-zA-Z]+$/.test(this.loginform.name)) {
+      if (/[a-zA-Z]+$/.test(this.loginform.Name)) {
         this.loginform.nameValidity = 'valid'
       } else {
         this.loginform.nameValidity = 'invalid'
@@ -340,7 +356,7 @@ export default {
     },
     validateEmail () {
       // eslint-disable-next-line no-useless-escape
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.username)) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.Username)) {
         this.loginform.usernameValidity = 'valid'
       } else {
         this.loginform.usernameValidity = 'invalid'
@@ -348,14 +364,14 @@ export default {
     },
     validatePassword () {
       // eslint-disable-next-line no-useless-escape
-      if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.loginform.password)) {
+      if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.loginform.Password)) {
         this.loginform.passwordValidity = 'valid'
       } else {
         this.loginform.passwordValidity = 'invalid'
       }
     },
     validateConfirm_Password () {
-      if (this.loginform.password !== this.loginform.confirm_password) {
+      if (this.loginform.Password !== this.loginform.confirm_password) {
         this.loginform.confirm_passwordValidity = 'invalid'
       } else {
         this.loginform.confirm_passwordValidity = 'valid'
@@ -363,15 +379,15 @@ export default {
     },
     validateAge () {
       // eslint-disable-next-line no-useless-escape
-      if (/^(00[1-9])|(0[1-9]\d)|(1[0-4]\d)|(150)$/.test(this.loginform.age)) {
+      if (/^(00[1-9])|(0[1-9]\d)|(1[0-4]\d)|(150)$/.test(this.loginform.Age)) {
         this.loginform.ageValidity = 'invalid'
       } else {
-        this.loginform.ageValidit = 'valid'
+        this.loginform.ageValidity = 'valid'
       }
     },
 
     validateBirthdate () {
-      let dateMomentObject = moment(this.loginform.birthdate, 'YYYY/MM/DD') // 1st argument - string, 2nd argument - format
+      let dateMomentObject = moment(this.loginform.Birthdate, 'YYYY/MM/DD') // 1st argument - string, 2nd argument - format
       let dateObject = dateMomentObject.toDate()
       if (dateObject.getTime() > Date.now()) {
         this.loginform.birthdateValidity = 'invalid'
@@ -381,26 +397,27 @@ export default {
     },
 
     async postData () {
-      console.log(this.loginform.name)
-      console.log(this.loginform.username)
-      console.log(this.loginform.password)
-      console.log(this.loginform.age)
-      console.log(this.loginform.gender)
-      console.log(this.loginform.country)
-
-      const response = await AuthenticationServices.register({
-        name: this.loginform.name,
-        username: this.loginform.username,
-        password: this.loginform.password,
-        birthdate: this.loginform.birthdate,
-        age: this.loginform.age,
-        gender: this.loginform.gender,
-        country: this.loginform.country
-      })
-      console.log('_______________________')
-      console.log(response)
-      console.log(response.data)
+      try {
+        const response = await AuthenticationServices.register({
+          Name: this.loginform.Name,
+          Username: this.loginform.Username,
+          Password: this.loginform.Password,
+          Birthdate: this.loginform.Birthdate,
+          Age: this.loginform.Age,
+          Gender: this.loginform.Gender,
+          Country: this.loginform.Country
+        })
+        console.log('_______________________')
+        console.log(response.data.message)
+        if (response.data.message === 'Email already in use') {
+          this.error = 'invalid'
+          alert(' Oops.....\n Email Already Taken:Please Login with that Email or Register with new Credentials')
+        }
+      } finally {
+        this.$router.push('/')
+      }
     }
   }
 }
+
 </script>

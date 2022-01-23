@@ -1,13 +1,12 @@
 module.exports = {
   port: process.env.PORT || 8081,
   db: {
-    database: process.env.DB_NAME || 'crud',
-    user: process.env.DB_USER || 'root',
-    PASSWORD: '',
+    database: 'crud',
+    user: 'root',
+    password: '',
     options: {
-      dialect: process.env.DIALECT || 'mysql',
-      host: process.env.HOST || 'localhost',
-      storage: './crud.mysql'
+      dialect: 'mysql',
+      host: 'localhost'
     }
 
   }

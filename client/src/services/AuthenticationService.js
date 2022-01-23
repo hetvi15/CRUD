@@ -5,6 +5,7 @@ export default{
   register (credentials) {
     console.log('Registering')
     console.log(credentials)
+    alert('Adding You......')
     return api().post('SignUp', credentials)
   }
 }

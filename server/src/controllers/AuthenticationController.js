@@ -1,5 +1,7 @@
-const { User } = require('../models/index')
-console.log('---------' + User)
+const { user } = require('../models/index')
+// const axios = require('axios')
+
+console.log(user)
 
 module.exports = {
   async register (req, res) {
@@ -7,12 +9,18 @@ module.exports = {
       console.log('HEYYYYY IN AUTHENTICATION')
       console.log(req.body)
       console.log(req.body.name)
-      const user = User.create(req.body)
-      res.send(user.toJSON())
+      const User = await user.create(req.body)
+      console.log(User.toJSON())
+      console.log('record inserted')
+      // res.redirect('http://local.mydomain.com:8080/#')
+      // const flash = req.flash('You are registered! Login to continue')
+      // res.send(flash)
+      res.redirect('/')
     } catch (err) {
       console.log(err)
       res.send({
         message: 'Email already in use'
+
       })
     }
   }

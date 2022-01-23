@@ -1,4 +1,4 @@
-const AuthenticationController = require('./controllers/AuthenticationController.js')
+const AuthenticationController = require('./controllers/AuthenticationController')
 console.log(AuthenticationController)
 
 module.exports = (app) => {
