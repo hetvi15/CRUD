@@ -4,9 +4,15 @@ console.log('Heyyyyyyy')
 export default{
   register (credentials) {
     console.log('Registering')
-    console.log(credentials)
-    alert('Adding You......')
+    // console.log(credentials)
+    // alert('Adding You......')
     return api().post('SignUp', credentials)
+  },
+  login (credentials) {
+    console.log('Login')
+    // console.log(credentials)
+    // alert('Adding You......')
+    return api().post('/', credentials)
   }
 }
 

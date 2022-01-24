@@ -297,7 +297,7 @@
             </div>
            <button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled">REGISTER</button>
             <br><br>
-            <router-link to="/">
+            <router-link to="/Login">
                 Already have an account ? Login
             </router-link>
         </div>
@@ -330,8 +330,7 @@ export default {
         val2: '',
         Country: '',
         Gender: 'Male'
-      },
-      counter: 0
+      }
     }
   },
   computed: {
@@ -407,14 +406,16 @@ export default {
           Gender: this.loginform.Gender,
           Country: this.loginform.Country
         })
-        console.log('_______________________')
-        console.log(response.data.message)
-        if (response.data.message === 'Email already in use') {
-          this.error = 'invalid'
-          alert(' Oops.....\n Email Already Taken:Please Login with that Email or Register with new Credentials')
-        }
-      } finally {
+        console.log(response)
+        alert('Adding You...Please Login to Continue')
         this.$router.push('/')
+      } catch (error) {
+        this.error = error.response.data.error
+        console.log(this.error)
+        if (this.error === 'Email already in use') {
+          this.error = 'invalid'
+          alert('Oops.....\n Email Already Taken:Please Login with that Email or Register with new Credentials')
+        }
       }
     }
   }

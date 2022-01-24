@@ -1,5 +1,4 @@
 const { user } = require('../models/index')
-// const axios = require('axios')
 
 console.log(user)
 
@@ -12,16 +11,67 @@ module.exports = {
       const User = await user.create(req.body)
       console.log(User.toJSON())
       console.log('record inserted')
-      // res.redirect('http://local.mydomain.com:8080/#')
-      // const flash = req.flash('You are registered! Login to continue')
-      // res.send(flash)
-      res.redirect('/')
+      res.send({
+        message: 'Record Inserted'
+      })
     } catch (err) {
       console.log(err)
-      res.send({
-        message: 'Email already in use'
+      res.status(404).send({
+        error: 'Email already in use'
 
       })
+    }
+  },
+  async login (req, res) {
+    try {
+      console.log('HEYYYYY IN Login')
+      console.log(req.body)
+      const { Username, Password } = req.body
+      console.log(Username + Password)
+      const User = await user.findOne({
+        where: {
+          Username: Username,
+          Password: Password
+        }
+      })
+      if (!User) {
+        console.log('yaha hi')
+        res.status(400).send({
+          error: 'The login information was incorrect'
+        })
+      } else {
+        res.send({
+          message: 'Successful'
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+/* async login (req, res) {
+    try {
+      const { Username, Password } = req.body
+      console.log(Username + Password)
+      const User = await user.findOne({
+        where: {
+          Username: Username,
+          Password: Password
+        }
+      })
+      // console.log(User)
+      if (User) {
+        console.log('successful')
+        res.redirect('/HomePage')
+      } else {
+        console.log('yaha hi')
+        res.send({
+          message: 'The login information was incorrect'
+        })
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 }

@@ -1,24 +1,19 @@
 const express = require('express')
-const session = require('express-session')
+// const session = require('express-session')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const { sequelize } = require('./models')
 const config = require('./config/config')
-const flash = require('connect-flash')
+// const flash = require('connect-flash')
+const location = require('location-href')
 
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
+
 app.use(cors())
-app.use(session(
-  {
-    secret: 'CRUD APP',
-    saveUninitialized: true,
-    resave: true
-  }
-))
-app.use(flash())
+location()
 
 // const db = require('./models')
 // db.sequelize.sync()
