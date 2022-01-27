@@ -1,3 +1,3 @@
 <template>
-    <div>ENTRYYY</div>
+    <div>new message</div>
 </template>

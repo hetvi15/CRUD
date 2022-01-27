@@ -2,11 +2,11 @@
 <form @submit.prevent="getLogin" method="POST">
     <div>
         <img src="../assets/crud_app.png" alt="Logo"><br>
-        <p v-if="error==='invalid'">Incorrect Credentials :( Please Sign Up or Login Again</p>
+        <p v-if="error==='invalid'" id="error">Incorrect Credentials :( Please Sign Up or Login Again</p>
         <div class="form-control" :class="{invalid:loginform.usernameValidity === 'invalid'}">
             <input type="text" placeholder="Enter Username" v-model="loginform.Username" required @blur="validateEmail"><br>
         </div>
-        <p v-if="loginform.usernameValidity==='invalid'">Please enter a valid email</p>
+        <p v-if="loginform.usernameValidity==='invalid'" class="errorEmail">Please enter a valid email</p>
         <br><br>
 
         <div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}">
@@ -26,7 +26,6 @@
 
 <script>
 import AuthenticationServices from '../services/AuthenticationService'
-
 export default {
   name: 'Login',
   data () {
@@ -38,21 +37,18 @@ export default {
         usernameValidity: '',
         passwordValidity: ''
       }
-
     }
   },
   computed: {
     isDisabled () {
-      if (this.loginform.usernameValidity && this.loginform.passwordValidity === 'valid') {
+      if (this.loginform.usernameValidity === 'valid' && this.loginform.passwordValidity === 'valid') {
         return false
       } else {
         return true
       }
     }
-
   },
   methods: {
-
     validateEmail () {
       // eslint-disable-next-line no-useless-escape
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.Username)) {
@@ -70,6 +66,7 @@ export default {
       }
     },
     async getLogin () {
+      console.log('here')
       try {
         const response = await AuthenticationServices.login({
           Username: this.loginform.Username,
@@ -88,5 +85,4 @@ export default {
     }
   }
 }
-
 </script>

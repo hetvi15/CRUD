@@ -21,10 +21,10 @@
             </div>
             <p v-if="loginform.passwordValidity==='invalid'">A valid password should contain atleast eight characters,minimum one letter and one number</p>
             <br>
-            <div class="form-control" :class="{invalid:loginform.confirm_passwordValidity === 'invalid'}">
-                <input type="password" placeholder="Confirm Password" v-model="loginform.confirm_password" required @blur="validateConfirm_Password"><br>
+            <div class="form-control" :class="{invalid:loginform.confirmPasswordValidity === 'invalid'}">
+                <input type="password" placeholder="Confirm Password" v-model="loginform.confirmPassword" required @blur="validateConfirm_Password"><br>
             </div>
-            <p v-if="loginform.confirm_passwordValidity==='invalid'">Your Passwords don't match</p>
+            <p v-if="loginform.confirmPasswordValidity==='invalid'">Your Passwords don't match</p>
             <br>
 
             <div class="form-control" :class="{invalid:loginform.birthdateValidity === 'invalid'}">
@@ -321,8 +321,8 @@ export default {
         usernameValidity: '',
         Password: '',
         passwordValidity: '',
-        confirm_password: '',
-        confirm_passwordValidity: '',
+        confirmPassword: '',
+        confirmPasswordValidity: '',
         Birthdate: '',
         birthdateValidity: '',
         Age: '',
@@ -335,8 +335,12 @@ export default {
   },
   computed: {
     isDisabled () {
-      if (this.loginform.nameValidity && this.loginform.usernameValidity && this.loginform.passwordValidity &&
-        this.loginform.confirm_passwordValidity && this.loginform.birthdateValidity === 'valid') {
+      console.log(this.loginform.nameValidity)
+      console.log(this.loginform.usernameValidity)
+      console.log(this.loginform.passwordValidity)
+      console.log(this.loginform.confirmPasswordValidity)
+      console.log(this.loginform.birthdateValidity)
+      if (this.loginform.nameValidity && this.loginform.usernameValidity && this.loginform.passwordValidity && this.loginform.confirmPasswordValidity && this.loginform.birthdateValidity === 'valid') {
         return false
       } else {
         return true
@@ -370,10 +374,10 @@ export default {
       }
     },
     validateConfirm_Password () {
-      if (this.loginform.Password !== this.loginform.confirm_password) {
-        this.loginform.confirm_passwordValidity = 'invalid'
+      if (this.loginform.Password !== this.loginform.confirmPassword) {
+        this.loginform.confirmPasswordValidity = 'invalid'
       } else {
-        this.loginform.confirm_passwordValidity = 'valid'
+        this.loginform.confirmPasswordValidity = 'valid'
       }
     },
     validateAge () {
