@@ -2,29 +2,32 @@
 <div class="container">
     <br>
     <br>
-    <h3> Enter Your Task </h3>
+    <h3> Enter Employee Details </h3>
     <form @submit.prevent="postData" method="POST">
 
         <div>
-            <div>
-                <input type="text" placeholder="Enter Employee Name" v-model="name" required><br>
+            <div class="form-control" :class="{invalid:nameValidity === 'invalid'}">
+                <input type="text" placeholder="Enter Employee Name" v-model="name" required @input="validateName"><br>
+                   <p v-if="nameValidity==='invalid'">Please enter a valid name</p>
             </div>
             <br>
-            <div>
-                <input type="text" placeholder="Enter Employee Email" v-model="email" required><br>
+            <div class="form-control" :class="{invalid:emailValidity === 'invalid'}">
+                <input type="text" placeholder="Enter Employee Email" v-model="email" @input="validateEmail" required><br>
+                <p v-if="emailValidity==='invalid'">Please enter a valid email</p>
             </div>
             <br>
-            <div>
-                <input type="number" placeholder="Enter Employee Mobile Number" v-model="mobile" required><br>
+            <div class="form-control" :class="{invalid:mobileValidity === 'invalid'}">
+                <input type="number" placeholder="Enter Employee Mobile Number" v-model="mobile" @input="validateMobile" required><br>
+                <p v-if="mobileValidity==='invalid'">Please enter a valid Mobile No</p>
             </div>
             <br>
             <div class="form-control" :class="{invalid:dateValidity === 'invalid'}">
-                <input placeholder="Enter Joining Date" type="text" onfocus="(this.type='date')" id="date" v-model="date" required @blur="validateDate">
+                <input placeholder="Enter Joining Date" type="text" onfocus="(this.type='date')" id="date" v-model="date" required @input="validateDate">
             </div>
             <p v-if="dateValidity==='invalid'">Please enter a valid date</p>
             <br>
             <div>
-                 <input placeholder="Enter Salary" type="number"  v-model="salary" >
+                 <input type="number" placeholder="Enter Salary" v-model="salary" >
             </div>
             <div>
                   <button type="submit" id="sub"  :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled" >ADD</button>
@@ -45,13 +48,16 @@ export default {
       email: '',
       mobile: '',
       date: '',
+      nameValidity: '',
+      emailValidity: '',
+      mobileValidity: '',
       dateValidity: '',
       salary: ''
     }
   },
   computed: {
     isDisabled () {
-      if (this.dateValidity === 'valid') {
+      if (this.emailValidity && this.nameValidity && this.dateValidity && this.mobileValidity === 'valid') {
         return false
       } else {
         return true
@@ -59,6 +65,28 @@ export default {
     }
   },
   methods: {
+    validateName () {
+      if (/[a-zA-Z]+$/.test(this.name)) {
+        this.nameValidity = 'valid'
+      } else {
+        this.nameValidity = 'invalid'
+      }
+    },
+    validateEmail () {
+      // eslint-disable-next-line no-useless-escape
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        this.emailValidity = 'valid'
+      } else {
+        this.emailValidity = 'invalid'
+      }
+    },
+    validateMobile () {
+      if (/^(\+\d{1,3}[- ]?)?\d{10}$/.test(this.mobile)) {
+        this.mobileValidity = 'valid'
+      } else {
+        this.mobileValidity = 'invalid'
+      }
+    },
     validateDate () {
       let dateMomentObject = moment(this.date, 'YYYY/MM/DD') // 1st argument - string, 2nd argument - format
       let dateObject = dateMomentObject.toDate()

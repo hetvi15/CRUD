@@ -22,30 +22,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.58% </span>
+                <span class="strong">67.74% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/31</span>
+                <span class='fraction'>21/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.33% </span>
+                <span class="strong">53.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/15</span>
+                <span class='fraction'>8/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/5</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.93% </span>
+                <span class="strong">66.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/27</span>
+                <span class='fraction'>18/27</span>
             </div>
         
             
@@ -54,7 +54,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -174,8 +174,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,29 +186,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -233,23 +233,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-&lt;form @submit.prevent="getLogin" method="POST"&gt;
+&lt;form @submit.prevent="getLogin"  method="POST"&gt;
     &lt;div&gt;
         &lt;img src="../assets/crud_app.png" alt="Logo"&gt;&lt;br&gt;
         &lt;p v-if="error==='invalid'" id="error"&gt;Incorrect Credentials :( Please Sign Up or Login Again&lt;/p&gt;
         &lt;div class="form-control" :class="{invalid:loginform.usernameValidity === 'invalid'}"&gt;
-            &lt;input type="text" placeholder="Enter Username" v-model="loginform.Username" required @blur="validateEmail"&gt;&lt;br&gt;
+            &lt;input type="text" placeholder="Enter Username" v-model="loginform.Username" required @input="validateEmail"&gt;&lt;br&gt;
         &lt;/div&gt;
         &lt;p v-if="loginform.usernameValidity==='invalid'" class="errorEmail"&gt;Please enter a valid email&lt;/p&gt;
         &lt;br&gt;&lt;br&gt;
 &nbsp;
         &lt;div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}"&gt;
-            &lt;input type="password" placeholder="Enter Password" v-model="loginform.Password" required @blur="validatePassword"&gt;&lt;br&gt;
+            &lt;input type="password" placeholder="Enter Password" v-model="loginform.Password" required @input="validatePassword"&gt;&lt;br&gt;
         &lt;/div&gt;
-        &lt;p v-if="loginform.passwordValidity==='invalid'"&gt;A valid password should contain atleast eight characters,minimum one letter and one number&lt;/p&gt;
+        &lt;div v-if="loginform.passwordValidity==='invalid'" id="errorPass"&gt;A valid password should contain atleast eight characters,minimum one letter and one number&lt;/div&gt;
         &lt;br&gt;&lt;br&gt;
         &lt;br&gt;
-        &lt;button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled"&gt;LOGIN&lt;/button&gt;
+        &lt;button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled" &gt;LOGIN&lt;/button&gt;
         &lt;br&gt;&lt;br&gt;
         &lt;router-link to="/SignUp"&gt;
             Not a Member? Sign Up
@@ -275,28 +275,28 @@ export default {
   },
   computed: {
     isDisabled () {
-<span class="cstat-no" title="statement not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>      if (this.loginform.usernameValidity === 'valid' &amp;&amp; this.loginform.passwordValidity === 'valid') {</span></span>
-<span class="cstat-no" title="statement not covered" >        return false</span>
+      if (this.loginform.usernameValidity === 'valid' &amp;&amp; this.loginform.passwordValidity === 'valid') {
+        return false
       } else {
         return true
       }
     }
   },
   methods: {
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    validateEmail () {</span></span>
+    validateEmail () {
       // eslint-disable-next-line no-useless-escape
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.Username)) {</span></span>
-<span class="cstat-no" title="statement not covered" >        this.loginform.usernameValidity = 'valid'</span>
-<span class="cstat-no" title="statement not covered" >      } else {</span>
-<span class="cstat-no" title="statement not covered" >        this.loginform.usernameValidity = 'invalid'</span>
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginform.Username)) {
+        this.loginform.usernameValidity = 'valid'
+      } else {
+        this.loginform.usernameValidity = 'invalid'
       }
     },
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    validatePassword () {</span></span>
+    validatePassword () {
       // eslint-disable-next-line no-useless-escape
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >      if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.loginform.Password)) {</span></span>
-<span class="cstat-no" title="statement not covered" >        this.loginform.passwordValidity = 'valid'</span>
-<span class="cstat-no" title="statement not covered" >      } else {</span>
-<span class="cstat-no" title="statement not covered" >        this.loginform.passwordValidity = 'invalid'</span>
+      if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.loginform.Password)) {
+        this.loginform.passwordValidity = 'valid'
+      } else {
+        this.loginform.passwordValidity = 'invalid'
       }
     },
 <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    async getLogin () {</span></span></span>
@@ -327,7 +327,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Jan 27 2022 23:28:57 GMT+0530 (India Standard Time)
+                at Sat Jan 29 2022 15:04:15 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="..\..\..\..\..\..\prettify.js"></script>

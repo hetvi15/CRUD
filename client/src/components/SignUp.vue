@@ -6,34 +6,34 @@
 
         <div>
             <div class="form-control" :class="{invalid:loginform.nameValidity === 'invalid'}">
-                <input type="text" placeholder="Enter Name" v-model="loginform.Name" required @blur="validateName"><br>
+                <input type="text" placeholder="Enter Name" v-model="loginform.Name" id="name" required @input="validateName"><br>
             </div>
             <br>
             <p v-if="loginform.nameValidity==='invalid'">Please enter a valid name</p>
             <div class="form-control" :class="{invalid:loginform.usernameValidity === 'invalid'}">
-                <input type="text" placeholder="Enter Username" v-model="loginform.Username" required @blur="validateEmail"><br>
+                <input type="text" placeholder="Enter Username" id="username" v-model="loginform.Username" required @input="validateEmail"><br>
             </div>
-            <p v-if="loginform.usernameValidity==='invalid'">Please enter a valid email</p>
+            <p v-if="loginform.usernameValidity==='invalid'" id="errorEm">Please enter a valid email</p>
             <p v-if="error==='invalid'">Email already in use </p>
             <br>
             <div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}">
-                <input type="password" placeholder="Enter Password" v-model="loginform.Password" required @blur="validatePassword"><br>
+                <input type="password" placeholder="Enter Password" id="password" v-model="loginform.Password" required @input="validatePassword"><br>
             </div>
             <p v-if="loginform.passwordValidity==='invalid'">A valid password should contain atleast eight characters,minimum one letter and one number</p>
             <br>
             <div class="form-control" :class="{invalid:loginform.confirmPasswordValidity === 'invalid'}">
-                <input type="password" placeholder="Confirm Password" v-model="loginform.confirmPassword" required @blur="validateConfirm_Password"><br>
+                <input type="password" placeholder="Confirm Password" id="confirm" v-model="loginform.confirmPassword" required @input="validateConfirm_Password"><br>
             </div>
             <p v-if="loginform.confirmPasswordValidity==='invalid'">Your Passwords don't match</p>
             <br>
 
             <div class="form-control" :class="{invalid:loginform.birthdateValidity === 'invalid'}">
-              <input placeholder="Enter Your Birthdate"  type="text" onfocus="(this.type='date')" id="date" v-model="loginform.Birthdate" required @blur="validateBirthdate">
+              <input placeholder="Enter Your Birthdate"  type="text" onfocus="(this.type='date')" id="date" v-model="loginform.Birthdate" required @input="validateBirthdate">
             </div>
             <p v-if="loginform.birthdateValidity==='invalid'">Please enter a valid date</p>
             <br>
             <div class="form-control" :class="{invalid:loginform.ageValidity === 'invalid'}">
-                <input type="number" placeholder="Enter Your Age" v-model="loginform.Age" required />
+                <input type="number" placeholder="Enter Your Age" v-model="loginform.Age" id="age" required />
             </div>
             <p v-if="loginform.ageValidity==='invalid'">Please enter your real age</p>
             <br>
@@ -52,7 +52,7 @@
                 <br>
             </div><br><br>
             <div>
-                <select v-model="loginform.Country" required>
+                <select v-model="loginform.Country"  id="country" required>
                     <option value="" disabled selected>Select Your Country</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Albania">Albania</option>

@@ -1,21 +1,21 @@
 <template>
-<form @submit.prevent="getLogin" method="POST">
+<form @submit.prevent="getLogin"  method="POST">
     <div>
         <img src="../assets/crud_app.png" alt="Logo"><br>
         <p v-if="error==='invalid'" id="error">Incorrect Credentials :( Please Sign Up or Login Again</p>
         <div class="form-control" :class="{invalid:loginform.usernameValidity === 'invalid'}">
-            <input type="text" placeholder="Enter Username" v-model="loginform.Username" required @blur="validateEmail"><br>
+            <input type="text" placeholder="Enter Username" v-model="loginform.Username" required @input="validateEmail"><br>
         </div>
         <p v-if="loginform.usernameValidity==='invalid'" class="errorEmail">Please enter a valid email</p>
         <br><br>
 
         <div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}">
-            <input type="password" placeholder="Enter Password" v-model="loginform.Password" required @blur="validatePassword"><br>
+            <input type="password" placeholder="Enter Password" v-model="loginform.Password" required @input="validatePassword"><br>
         </div>
-        <p v-if="loginform.passwordValidity==='invalid'">A valid password should contain atleast eight characters,minimum one letter and one number</p>
+        <div v-if="loginform.passwordValidity==='invalid'" id="errorPass">A valid password should contain atleast eight characters,minimum one letter and one number</div>
         <br><br>
         <br>
-        <button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled">LOGIN</button>
+        <button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled" >LOGIN</button>
         <br><br>
         <router-link to="/SignUp">
             Not a Member? Sign Up
