@@ -38,6 +38,23 @@ describe('Registering', () => {
     expect(newStud.statusCode).toBe(404)
   })
 })
+describe('Registering', () => {
+  test('SignUp Should fail wrong credentials', async () => {
+    const newStud = await request(app)
+      .post('/SignUp')
+      .send({
+        Name: 'kash',
+        Username: 'kash@gm.co',
+        Password: '12k',
+        Birthdate: '2008/12/26',
+        Age: 13,
+        Gender: 'Female',
+        Country: 'India'
+
+      }).expect(404)
+    expect(newStud.statusCode).toBe(404)
+  })
+})
 describe('Login', () => {
   test('Should Login-response 200', async () => {
     // jest.setTimeout(10000)
