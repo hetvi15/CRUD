@@ -44,10 +44,11 @@ export default{
       console.log('yeahhh')
       try {
         const response = await AuthenticationServices.delete({
-          Email: this.email
+          Email: this.username
         })
         console.log(response)
-        alert('Data Deleted')
+        console.log(response.data.message)
+        alert('Record Deleted')
         this.$router.push('/Read')
         // this.error = 'valid'
         // this.array = response.data.Employee
@@ -56,10 +57,6 @@ export default{
         this.error = error.response.data.error
         console.log(this.error)
         alert('Email ID not Found')
-        if (this.error === 'The login information was incorrect') {
-          // alert('Invalid Email Id or Password')
-          this.error = 'invalid'
-        }
       }
     },
     GotoHomePage () {

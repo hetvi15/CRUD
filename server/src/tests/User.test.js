@@ -62,8 +62,8 @@ describe('Login', () => {
       .post('/')
       .send({
 
-        Username: 'Hetvi@gmail.com',
-        Password: '12345678h'
+        Username: 'kash@gm.co',
+        Password: '12345678k'
 
       }).expect(200)
     expect(newStud.statusCode).toBe(200)

@@ -54,9 +54,15 @@ module.exports = {
         { where: { Email: req.body.email } }
       )
       console.log(Employee)
-      res.status(200).send({
-        message: 'Record Updated'
-      })
+      if (!Employee) {
+        res.status(404).send({
+          message: 'Email not found'
+        })
+      } else {
+        res.status(200).send({
+          message: 'Record Updated'
+        })
+      }
     } catch (err) {
       console.log(err)
       res.status(404).send({
@@ -73,9 +79,15 @@ module.exports = {
         { where: { Email: req.body.Email } }
       )
       console.log(Employee)
-      res.send({
-        message: 'Record Deleted'
-      })
+      if (!Employee) {
+        res.status(404).send({
+          message: 'Email not found'
+        })
+      } else {
+        res.send({
+          message: 'Record Deleted'
+        })
+      }
     } catch (err) {
       console.log(err)
       res.status(404).send({

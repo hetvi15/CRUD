@@ -12,7 +12,7 @@
         <div class="form-control" :class="{invalid:loginform.passwordValidity === 'invalid'}">
             <input type="password" placeholder="Enter Password" v-model="loginform.Password" required @input="validatePassword"><br>
         </div>
-        <div v-if="loginform.passwordValidity==='invalid'" id="errorPass">A valid password should contain atleast eight characters,minimum one letter and one number</div>
+        <p v-if="loginform.passwordValidity==='invalid'" id="errorPass">A valid password should contain atleast eight characters,minimum one letter and one number</p>
         <br><br>
         <br>
         <button type="submit" id="sub" :class="(isDisabled) ? '' : 'selected'" :disabled="isDisabled" >LOGIN</button>
