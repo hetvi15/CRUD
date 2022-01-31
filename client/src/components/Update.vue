@@ -126,7 +126,8 @@ export default {
         alert('Data Updated')
         this.$router.push('/Read')
       } catch (error) {
-        this.error = error.response.data.error
+        alert('Email Id Not Found')
+        /// this.error = error.response.data.error
       }
     }
   }

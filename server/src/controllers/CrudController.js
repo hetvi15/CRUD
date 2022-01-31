@@ -54,18 +54,13 @@ module.exports = {
         { where: { Email: req.body.email } }
       )
       console.log(Employee)
-      if (Employee.length(0)) {
-        res.status(200).send({
-          message: 'Error'
-        })
-      }
-      res.send({
-        message: 'Record Inserted'
+      res.status(200).send({
+        message: 'Record Updated'
       })
     } catch (err) {
       console.log(err)
       res.status(404).send({
-        error: 'Email Not Found'
+        error: 'Error'
 
       })
     }

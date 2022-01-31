@@ -40,7 +40,7 @@ module.exports = {
           error: 'The login information was incorrect'
         })
       } else {
-        res.send({
+        res.status(200).send({
           message: 'Successful'
         })
       }

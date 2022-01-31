@@ -55,6 +55,7 @@ export default{
       } catch (error) {
         this.error = error.response.data.error
         console.log(this.error)
+        alert('Email ID not Found')
         if (this.error === 'The login information was incorrect') {
           // alert('Invalid Email Id or Password')
           this.error = 'invalid'
